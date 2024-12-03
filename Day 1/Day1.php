@@ -74,7 +74,7 @@ for ($i = 0; $i < count($colonna1); $i++) {
 
 echo $somma;
 echo '<br>';
-echo '1938424';
+// echo '1938424'; <------- thing I just needed for a comparison to check if the numbers were the same with a test or not
 
 
 
@@ -86,6 +86,32 @@ echo '1938424';
 
 
 //I'm still a baby dev, some things I had to search up 'cause I'm new to all this, especially PHP in itself lmfao, so please good Lord up above in the heavens have mercy on poor small me.
+
+
+
+$similarityScore = 0;
+
+for ($i = 0; $i < count($colonna1); $i++) {
+    //Get the current number in colonna1
+    $num1 = $colonna1[$i];
+
+    //Count how many times $num1 appears in colonna2
+    $count = 0; //Initialize the counter for the occurrences
+
+    for ($j = 0; $j < count($colonna2); $j++) {
+
+        if ($colonna2[$j] == $num1) {
+            
+            $count++; //Increment the counter by each time the number has found a similarity
+        }
+    }
+    
+    //Multiply the current number by the count of its occurrences in colonna2
+    $similarityScore += $num1 * $count;
+}
+
+echo '<br>';
+echo "Similarity score: " . $similarityScore;
 
 
 
