@@ -41,7 +41,7 @@ function isSafeReportWithDamper($report) {
         return true;
     }
 
-    //Testing every single report by removing a single level
+    //Testing every single report by removing a single level trying with every single level report by report
     for ($i = 0; $i < $n; $i++) {
         $modifiedReport = array_merge(array_slice($levels, 0, $i), array_slice($levels, $i + 1));  //Removes $i element
         $modifiedReportStr = implode(" ", $modifiedReport);
