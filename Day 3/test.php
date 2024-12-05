@@ -1,41 +1,48 @@
 <?php 
 
+
 $data = "!mul(417,528)why();what()?how()from()who()where() ~mul(215,18){} ])/from()*do(),)* ##select()mul(89,59):*select(805,600)*mul(709,138)";
 
-//Find occurrences "mul(num,num)"
+//
+
+
+
+// Funzione per trovare le occorrenze di mul(numero,numero)
 function mulFinder($file) {
-    //regEx to pinpoint mul(num,num)
+    // RegEx corretta per catturare mul(numero,numero)
     preg_match_all('/mul\(\d+,\d+\)/', $file, $matches);
     
-    //returns as array
-    return $matches[0];
+    // Restituisce le occorrenze in formato di stringa separata da nuove righe
+    return implode("\n", $matches[0]);
 }
 
-//get all "mul(numero,numero)" from string
-$matches = mulFinder($data);
-var_dump($matches); //was just checking what I had
-echo '<br>'; //wanted just a bit of space lol
+// Echo del risultato e uso di nl2br per visualizzare correttamente le nuove righe su una pagina web
+// echo mulFinder($abominio);
+$newAbominio = mulFinder($data);
 
-//add up every multiplication result
-function calculateTotalMultiplication($matches) {
-    $total = 0;
 
-    foreach ($matches as $match) {
-        //regEx to pinpoint numbers in each line
-        if (preg_match('/mul\((\d+),(\d+)\)/', $match, $nums)) {
-            $num1 = (int) $nums[1];
-            $num2 = (int) $nums[2];
-            $total += $num1 * $num2; //stack up results
+// Usa explode per trasformare la stringa in un array separato da \n
+$lines = explode("\n", $newAbominio);
+
+    // preg_match('/mul\((\d+),(\d+)\)/', $string, $matches);
+
+    $resultPre = 0;
+    $resultFinal = 0;
+
+
+    foreach ($lines as $line) {
+        // echo $line . "<br>";  // Ogni occorrenza va a capo usando <br> in HTML
+        if(isset($matches[1]) && isset($matches[2])) {
+            $num1 = (int) $matches[1];
+            $num2 = (int) $matches[2];
+        
+            $resultPre = $num1 * $num2;
+            //non facendo += non aggiungo risultati e calcolo solo il primo
+
         }
+        //questo di conseguenza non serve a niente
+        $resultFinal += $resultPre;
     }
 
-    return $total;
-}
-
-//calculate final result
-$finalResult = calculateTotalMultiplication($matches);
-
-//Final result
-echo "somma: $finalResult";
 
 ?>
